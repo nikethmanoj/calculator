@@ -11,44 +11,42 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   String input = "";
   String output = "0";
-  
-  void buttonpresssed(String value){
+
+  void buttonpresssed(String value) {
     setState(() {
-      if(value=="C"){
+      if (value == "C") {
         input = "";
         output = "0";
-      }else if(value == "Del"){
-        input = input.isNotEmpty ? input.substring(0,input.length-1) : "";
-      }else if(value == "="){
-        try{
+      } else if (value == "Del") {
+        input = input.isNotEmpty ? input.substring(0, input.length - 1) : "";
+      } else if (value == "=") {
+        try {
           output = evaluateExp(input);
-
-        }catch(e){
+        } catch (e) {
           output == "ERROR";
         }
-      }else{
-          input = input + value ;
+      } else {
+        input = input + value;
       }
     });
+  }
 
-  } 
-
-  String evaluateExp(String expression){
-    try{
+  String evaluateExp(String expression) {
+    try {
       return _calculate(expression).toString();
-    }catch(e){
+    } catch (e) {
       return "ERROR";
     }
-
   }
-  double _calculate(String expression) {
-  expression = expression.replaceAll("x", "*").replaceAll("÷", "/");
-  Parser p = Parser();
-  Expression exp = p.parse(expression);
-  ContextModel cm = ContextModel();
-  return exp.evaluate(EvaluationType.REAL,cm);
 
-}
+  double _calculate(String expression) {
+    expression = expression.replaceAll("x", "*").replaceAll("÷", "/");
+    Parser p = Parser();
+    Expression exp = p.parse(expression);
+    ContextModel cm = ContextModel();
+    return exp.evaluate(EvaluationType.REAL, cm);
+  }
+
   Widget buildButton(String text) {
     return Expanded(
       child: ElevatedButton(
@@ -60,10 +58,13 @@ class _CalculatorState extends State<Calculator> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(24),
-            backgroundColor: text == "=" ? Colors.black : Colors.white,
-            foregroundColor: text == "=" ? Colors.white : Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+          padding: EdgeInsets.all(24),
+          backgroundColor: text == "=" ? Colors.black : Colors.white,
+          foregroundColor: text == "=" ? Colors.white : Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
       ),
     );
   }
@@ -84,57 +85,66 @@ class _CalculatorState extends State<Calculator> {
                   Text(
                     input,
                     style: TextStyle(
-                        color: const Color.fromARGB(255, 110, 110, 110),
-                        fontSize: 25),
+                      color: const Color.fromARGB(255, 69, 67, 67),
+                      fontSize: 25,
+                    ),
                   ),
                   Text(
                     output,
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  )
+                      color: const Color.fromARGB(255, 235, 230, 230),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
           Column(
-            children: [Row(
-              children: [
-                buildButton("C"),
-                buildButton("Del"),
-                buildButton("%"),
-                buildButton("/"),
-              ],
-            ),
-            Row(
-              children: [
-                buildButton("7"),
-                buildButton("8"),
-                buildButton("9"),
-                buildButton("x"),
-              ],
-            ),
-            Row(children: [
-              buildButton("4"),
-              buildButton("5"),
-              buildButton("6"),
-              buildButton("-"),
-            ],),
-            Row(children: [
-              buildButton("1"),
-              buildButton("2"),
-              buildButton("3"),
-              buildButton("+"),
-            ],),
-            Row(children: [
-              buildButton(""),
-              buildButton("0"),
-              buildButton("."),
-              buildButton("="),
-            ],)
+            children: [
+              Row(
+                children: [
+                  buildButton("C"),
+                  buildButton("Del"),
+                  buildButton("%"),
+                  buildButton("/"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("7"),
+                  buildButton("8"),
+                  buildButton("9"),
+                  buildButton("x"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("4"),
+                  buildButton("5"),
+                  buildButton("6"),
+                  buildButton("-"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton("1"),
+                  buildButton("2"),
+                  buildButton("3"),
+                  buildButton("+"),
+                ],
+              ),
+              Row(
+                children: [
+                  buildButton(""),
+                  buildButton("0"),
+                  buildButton("."),
+                  buildButton("="),
+                ],
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

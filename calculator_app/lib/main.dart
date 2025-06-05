@@ -1,5 +1,6 @@
 import 'package:calculator_app/calculator.dart';
 import 'package:calculator_app/calculatorios.dart';
+import 'package:calculator_app/ui.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Calculatorios(),
+      home: Ui(),
       debugShowCheckedModeBanner: false,
     );
   }
